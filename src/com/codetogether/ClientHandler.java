@@ -86,7 +86,7 @@ public class ClientHandler extends Thread{
 			e.printStackTrace();
 		}
 	}
-	
+	//get the username from input
 	public static String readUntilNull(BufferedReader reader){
 		StringBuilder sb = new StringBuilder();
 		String message = "";
@@ -107,6 +107,7 @@ public class ClientHandler extends Thread{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+                System.out.println("messgare username : "+message);
 		return message;
 	}
 

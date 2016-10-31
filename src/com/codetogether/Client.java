@@ -48,14 +48,15 @@ public class Client {
 			}
 			running = true;
 			
-			send(username); //Sends the username to the server	
+			send(username); //Sends the username to all client	
 			
 			receive();
 			
-	        gui.setVisible(true);
+                        gui.setVisible(true);
 	        
 	        
-		}else{
+		}
+                else{
 			JOptionPane.showMessageDialog(null, "Error! Could not connect to the hub.");
 		}
 	}
@@ -72,6 +73,8 @@ public class Client {
 	}
 	
 	public void send(final String message){
+            //sending all username when a client created to all client
+            //or send gui doc to all client
 		sendThread = new Thread("send"){
 			public void run(){
 				outputStream.print(message);
@@ -101,6 +104,7 @@ public class Client {
 							}
 						}else{
 							gui.setSourceCode(s);
+                                                        //getting all doc to gui
 						}
 						
 					}

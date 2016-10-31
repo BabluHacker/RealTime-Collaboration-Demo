@@ -16,6 +16,7 @@ import java.io.IOException;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ActionMap;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
@@ -49,7 +50,7 @@ public class MainGUI extends JFrame {
 	private JMenuBar menuBar;
 	public JMenu mnConnectedUsers;
 	
-	private static final Action New = null;
+	//private static final Action New = null;
 	private JFileChooser dialog = new JFileChooser(System.getProperty("user.dir"));
 	private String currentFile = "Untitled";
 	private boolean changed = false;
@@ -84,6 +85,7 @@ public class MainGUI extends JFrame {
 				changed = true;
 				Save.setEnabled(true);
 				SaveAs.setEnabled(true);
+                                
 			}
 		});
 		
@@ -92,7 +94,7 @@ public class MainGUI extends JFrame {
 		Copy = m.get(DefaultEditorKit.copyAction);
 		Paste = m.get(DefaultEditorKit.pasteAction);
 		
-		
+		//window closing working
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				try {
@@ -192,7 +194,9 @@ public class MainGUI extends JFrame {
 								"Warning", JOptionPane.YES_NO_OPTION);
 				if (choice == JOptionPane.YES_OPTION) {
 					CSyntaxKit.initKit();
-					textPane.setContentType("text/python");
+					//textPane.setContentType("text/python");
+                                        
+                                        
 				} else {
 					return;
 				}
@@ -204,8 +208,8 @@ public class MainGUI extends JFrame {
 			mnFile.getItem(i).setIcon(null);
 		
 		mnEdit.add(Cut);mnEdit.add(Copy);mnEdit.add(Paste);
-
-		mnEdit.getItem(0).setText("Cut out");
+                //mnEdit.add(New); mnEdit.getItem(3).setIcon((Icon) new ImageIcon("/CUt.png").getImage());
+		mnEdit.getItem(0).setText("Cut");
 		mnEdit.getItem(1).setText("Copy");
 		mnEdit.getItem(2).setText("Paste");
 		
@@ -216,7 +220,7 @@ public class MainGUI extends JFrame {
 		
 		JButton cut = tool.add(Cut), cop = tool.add(Copy),pas = tool.add(Paste);
 		
-		cut.setText(null); cut.setIcon(new ImageIcon("cut.gif"));
+		cut.setText(null); cut.setIcon(new ImageIcon("cut.png"));
 		cop.setText(null); cop.setIcon(new ImageIcon("copy.gif"));
 		pas.setText(null); pas.setIcon(new ImageIcon("paste.gif"));
 		
@@ -254,6 +258,63 @@ public class MainGUI extends JFrame {
 		//textPane.setContentType("text/c");
 	}
 	
+        
+        Action New = new AbstractAction("New", new ImageIcon("New.gif")) {
+		private static final long serialVersionUID = 1L;
+
+		public void actionPerformed(ActionEvent e) {
+                        if(textPane.getDocument().equals("")){
+                            System.out.println("Text is empty");
+                        }
+                        else{
+                            saveOld();
+                        }
+			textPane.setText(null);
+                        currentFile = "Untitled";
+			setTitle(currentFile);
+			changed = true;
+			SaveAs.setEnabled(true);
+		}
+	};
+  /*      
+        //ACTION FOR NEW FILE ON THE TOOLBAR
+        newFile.addActionListener( new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                opened = false;
+                if(area.getText().equals(""))
+                {
+                    System.out.println("text is empty");
+                }
+                else
+                {
+                    int confirm = JOptionPane.showConfirmDialog(null,
+                    "Would you like to save?",
+                    "New File",
+                    JOptionPane.YES_NO_CANCEL_OPTION);
+
+                    if( confirm == JOptionPane.YES_OPTION )
+                    {
+                        saveFile();
+                        area.setText(null);
+                        statusPanel.removeAll();
+                        statusPanel.validate();
+                    }
+                    else
+                    if( confirm == JOptionPane.CANCEL_OPTION )
+                    {}
+                    else if( confirm == JOptionPane.NO_OPTION )
+                    {
+                        area.setText(null);
+                        statusPanel.removeAll();
+                        statusPanel.validate();
+                    }
+                }
+            }
+        });
+*/
+        
 	Action Open = new AbstractAction("Open", new ImageIcon("open.gif")) {
 		private static final long serialVersionUID = 1L;
 

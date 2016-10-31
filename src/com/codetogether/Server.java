@@ -59,7 +59,7 @@ public class Server implements Runnable{
 		}
 	}
 	
-	public void disconnect(){
+	/*public void disconnect(){
 		synchronized(this){
 			for(int i = 0; i < MAXCLIENTS; i++){ //loops through every client thread
 				if(clients[i] != null && clients[i].getClientName() != null){ //finds the other clients (except the current client)
@@ -80,5 +80,5 @@ public class Server implements Runnable{
 			}
 		}
 		return onlineUsers;
-	}
+	}*/
 }

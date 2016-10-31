@@ -20,6 +20,7 @@ public class ConnectGUI extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+        
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,6 +37,7 @@ public class ConnectGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+        
 	public ConnectGUI() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -51,12 +53,14 @@ public class ConnectGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+                //START A HUB BUTTON SETUP
 		JButton btnStartAHub = new JButton("Start a hub");
 		btnStartAHub.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				startHub();
 			}
 		});
+                //JOIN A HUB BUTTON SETUP
 		btnStartAHub.setBounds(76, 46, 124, 51);
 		contentPane.add(btnStartAHub);
 		
@@ -70,30 +74,30 @@ public class ConnectGUI extends JFrame {
 		contentPane.add(btnJoinAHub);
 	}
 	
-	private void startHub(){
+    private void startHub(){
         String username = JOptionPane.showInputDialog("Please enter your name:");
         String address = "";
         try {
-			address = InetAddress.getLocalHost().getHostAddress();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "An error has occurred. Please restart the program and try again.");
-			System.exit(1);
-		}
+            address = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "An error has occurred. Please restart the program and try again.");
+            System.exit(1);
+        }
         
         if(username.equals("")){
-			 JOptionPane.showMessageDialog(null, "Please do not leave anything blank.");
-			 return;
-		 }
+            JOptionPane.showMessageDialog(null, "Please do not leave anything blank.");
+            return;
+        }
         
         Server server = new Server(6400);
-		Thread serverThread = new Thread(server);
-		serverThread.start();
+            Thread serverThread = new Thread(server);
+            serverThread.start();
 
         new Client(username, address);
         
         dispose();
-	}
+    }
 	
 	private void joinHub(){
 		 String username = JOptionPane.showInputDialog("Please enter your name:");
